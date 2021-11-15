@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>GameFinder</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="bootstrap.min.css" th:href="@{bootstrap.min.css}" />
+</head>
+<body>
+	<div style="margin: 10px auto; min-width: 800px; max-width: 1200px;">
+		<h1>Games</h1>
+		<table class="table table-striped">
+			<tr>
+				
+				<th>Title</th>
+				<th>Genre</th>
+				<th>Description</th>
+				<th>Release year</th>
+				<th>Developer</th>
+				<th>Publisher</th>
+				<th>Price</th>
+				
+			</tr>
+			<tr th:each = "game : ${games}">
+				
+				<td th:text="${game.title}"></td>
+				<td th:text="${game.genre.name}"></td>
+				<td th:text="${game.desc}"></td>
+				<td th:text="${game.releaseyear}"></td>
+				<td th:text="${game.developer}"></td>
+				<td th:text="${game.publisher}"></td>
+				<td th:text="${game.price}"></td>
+				<td><a class="btn btn-danger" th:href="@{/delete/{id}(id=${game.id})}">Delete</a></td>
+				<td><a th:href="@{/updategame/{id}(id=${game.id})}">Update</a></td>
+				
+			</tr>
+		</table>
+		<a class="btn btn-success" href="/addgame">Add game</a>
+	</div>
+</body>
+</html> 
