@@ -11,6 +11,8 @@ import hh.swd04.GameFinderProject.domain.Game;
 import hh.swd04.GameFinderProject.domain.GameRepository;
 import hh.swd04.GameFinderProject.domain.Genre;
 import hh.swd04.GameFinderProject.domain.GenreRepository;
+import hh.swd04.GameFinderProject.domain.User;
+import hh.swd04.GameFinderProject.domain.UserRepository;
 
 @SpringBootApplication
 public class GameFinderProjectApplication {
@@ -22,7 +24,7 @@ public class GameFinderProjectApplication {
 	}
 
 	@Bean
-	public CommandLineRunner gameDemo(GameRepository repository, GenreRepository genrerepository) {
+	public CommandLineRunner gameDemo(GameRepository repository, GenreRepository genrerepository, UserRepository userrepository) {
 		return (args) -> {
 			log.info("Save some games");
 			
@@ -31,6 +33,8 @@ public class GameFinderProjectApplication {
 			
 			repository.save(new Game("Modern Warfare", genre1, "Fast-paced action shooter", 2009, "EA", "EA", 39.99));
 			 
+			User admin = new User("admin", "$2a$12$q/Z2L4YQiPlLO44bMqoYaeAH5pyL39.M51h5aZZ6Y8GH305lbMv3i", "ADMIN");
+			userrepository.save(admin);
 			
 			log.info("Get the games");
 			for (Game game : repository.findAll()) {
