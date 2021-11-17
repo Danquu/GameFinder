@@ -23,12 +23,13 @@ public class GameController {
 	@Autowired
 	private GenreRepository genrerepository;
 	
-	
+	//default
 	@RequestMapping(value= "/index", method = RequestMethod.GET)
 	public String index() {
 		return "redirect:/gamelist";
 	}
 	
+	//Näyttää listan peleistä
 	@RequestMapping(value="/gamelist", method = RequestMethod.GET)
 	public String listGame(Model model) {
 		
@@ -36,6 +37,7 @@ public class GameController {
 		return "gamelist";
 	}
 	
+	//Lisää peli
 	@RequestMapping(value="/addgame")
 	public String addGame(Model model) {
 		
@@ -45,6 +47,7 @@ public class GameController {
 	
 	}
 	
+	//Tallenna peli
 	@RequestMapping(value ="/save", method = RequestMethod.POST)
     public String saveGame(Game game){
 		//jos id 0 tai null = SQL Insert, muuten SQL Update
@@ -52,14 +55,15 @@ public class GameController {
         return "redirect:/gamelist";
     }    
 	
+	//Poista peli ID:n avulla
 	@RequestMapping(value ="/delete/{id}", method = RequestMethod.GET)
 	@PreAuthorize("hasRole('ADMIN')")
-    public String deleteBook(@PathVariable("id") Long id, Model model) {
+    public String deleteGame(@PathVariable("id") Long id, Model model) {
     	repository.deleteById(id);
         return "redirect:../gamelist";
     }     
 	
-	
+	//Päivitä pelin tietoja ID:n avulla
 	@RequestMapping(value ="/updategame/{id}", method = RequestMethod.GET)
 	@PreAuthorize("hasRole('ADMIN')")
 	public String editGame(@PathVariable("id") Long id, Model model) {

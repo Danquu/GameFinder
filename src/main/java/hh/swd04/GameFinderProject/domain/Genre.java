@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -15,9 +16,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Genre {
 	
 	@Id @GeneratedValue private Long genreid;
-	private String name;
 	
-	//TODO: TARKISTA!!
+	@NotBlank(message="Name is mandatory") private String name;
+	
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "genre")
 	@JsonIgnoreProperties("genre")
 	private List<Game> games;

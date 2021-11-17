@@ -3,19 +3,32 @@
 <head>
     <title>Genre</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
 </head>
 <body>
 	<h1>Categories</h1>
-    <table>
+    <table class="table table-striped">
+    
+    
 		<tr>
 		    <th>Name</th>
 		    
 		</tr>  
     	<tr th:each = "genre : ${genres}">
+    		
     		<td th:text="${genre.name}"></td>
+    		
+    		<td><a th:href="@{/updategenre/{id}(id=${genre.genreid})}">Update</a></td>
+    		
     		
  		   		
     	</tr>
      </table> 	
+     
+     <a class="btn btn-success" href="/addgenre">Add Genre</a>
+    
+     <a class="btn btn-info" href="/gamelist">Back to gamelist</a>
+  
+	
 </body>
 </html>

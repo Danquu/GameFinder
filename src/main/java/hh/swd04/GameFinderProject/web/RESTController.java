@@ -3,7 +3,11 @@ package hh.swd04.GameFinderProject.web;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +30,8 @@ public class RESTController {
 	@Autowired
 	private GenreRepository genrerepository;
 	
+	
+	
 	//RESTillä pelien listaus
 		@RequestMapping(value="/games", method = RequestMethod.GET)
 		public @ResponseBody List<Game> gameListRest() {
@@ -38,10 +44,18 @@ public class RESTController {
 			return repository.findById(id);
 		}
 		
-		//RESTillä pelien tallentaminen
+	
+		
+		//RESTillä pelien lisäys
 		@RequestMapping(value="/games", method = RequestMethod.POST)
-		public @ResponseBody Game saveGameRest(@RequestBody Game game) {
-			return repository.save(game);
+		ResponseEntity<String> addGameRest(@Valid @RequestBody Game game) {
+			
+			if(game.getTitle() == null) {
+				return new ResponseEntity<String>("Invalid request", HttpStatus.NOT_FOUND);
+			}
+			
+			repository.save(game);
+			return new ResponseEntity<String>("Game saved", HttpStatus.OK);
 		}
 		
 		//RESTillä genrelistaus

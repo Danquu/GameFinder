@@ -1,14 +1,14 @@
 package hh.swd04.GameFinderProject.domain;
 
-import java.sql.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 
 
@@ -18,14 +18,21 @@ public class Game {
 	
 	
 @Id @GeneratedValue private Long id;
+
+@NotBlank(message = "Title is mandatory")
 private String title;
+
+@NotBlank(message = "Description is mandatory")
 private String desc;
+
 private int releaseyear;
+
 private String developer;
+
 private String publisher;
+
 private Double price;
 
-//TODO: TARKISTA!!!
 @ManyToOne
 @JsonIgnoreProperties ("games")
 @JoinColumn(name = "genreid")

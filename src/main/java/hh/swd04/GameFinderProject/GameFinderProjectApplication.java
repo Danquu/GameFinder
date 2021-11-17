@@ -30,8 +30,11 @@ public class GameFinderProjectApplication {
 			
 			Genre genre1 = new Genre("FPS");
 			genrerepository.save(genre1);
+			Genre genre2 = new Genre("MMORPG");
+			genrerepository.save(genre2);
 			
 			repository.save(new Game("Modern Warfare", genre1, "Fast-paced action shooter", 2009, "EA", "EA", 39.99));
+			repository.save(new Game("Diablo 3", genre2, "Free-roaming online game", 2009, "Blizzard", "Blizzard", 19.99));
 			 
 			User admin = new User("admin", "$2a$12$q/Z2L4YQiPlLO44bMqoYaeAH5pyL39.M51h5aZZ6Y8GH305lbMv3i", "ADMIN");
 			userrepository.save(admin);
