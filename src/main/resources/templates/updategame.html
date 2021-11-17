@@ -1,11 +1,11 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Adding a book</title>
+    <title>Update a game</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>Add book</h1>
+	<h1>Updating game</h1>
 	<div>
 		<form th:object="${game}" th:action="@{/save}" action="#" method="post">
 		  	<input type="hidden" id="id" th:field="*{id}"/>
