@@ -37,9 +37,13 @@
 				
 			</tr>
 		</table>
-		<a class="btn btn-success" href="/addgame">Add game</a>
+		<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-success" href="/addgame">Add game</a></td>
+		
+		<div sec:authorize="isAnonymous()">
 		<p>Click <a th:href = "@{/login}">here</a> to log in.</p>
-		<p>Click <a th:href = "@{/logout}">here</a> to log out.</p>
+		</div>
+		
+		<td sec:authorize="hasAuthority('ADMIN')"><p>Click <a th:href = "@{/logout}">here</a> to log out.</p></td>
 		
 	</div>
 </body>

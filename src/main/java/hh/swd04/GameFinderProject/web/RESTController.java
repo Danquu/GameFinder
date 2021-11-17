@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import hh.swd04.GameFinderProject.domain.Game;
 import hh.swd04.GameFinderProject.domain.GameRepository;
+import hh.swd04.GameFinderProject.domain.Genre;
+import hh.swd04.GameFinderProject.domain.GenreRepository;
 
 
 @Controller
@@ -20,6 +22,9 @@ public class RESTController {
 	
 	@Autowired
 	private GameRepository repository;
+	
+	@Autowired
+	private GenreRepository genrerepository;
 	
 	//RESTillä pelien listaus
 		@RequestMapping(value="/games", method = RequestMethod.GET)
@@ -38,6 +43,28 @@ public class RESTController {
 		public @ResponseBody Game saveGameRest(@RequestBody Game game) {
 			return repository.save(game);
 		}
+		
+		//RESTillä genrelistaus
+		@RequestMapping(value="genres", method = RequestMethod.GET)
+		public @ResponseBody List<Genre> genreListRest() {
+			return (List<Genre>) genrerepository.findAll();
+		}
+		
+		//RESTillä genren haku ID:n avulla
+				@RequestMapping(value="/genres/{id}", method = RequestMethod.GET)
+				public @ResponseBody Optional<Genre> findGenreRest(@PathVariable("id") Long genreid) {
+					return genrerepository.findById(genreid);
+		}
+				
+		//RESTillä genren tallentaminen
+		@RequestMapping(value="/genres", method = RequestMethod.POST)
+		public @ResponseBody Genre saveGenreRest(@RequestBody Genre genre) {
+					return genrerepository.save(genre);
+		}
+
+
+		
+		
 		
 		
 
