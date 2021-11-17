@@ -23,6 +23,11 @@ public class GameController {
 	@Autowired
 	private GenreRepository genrerepository;
 	
+	@RequestMapping(value="/", method = RequestMethod.GET)
+	public String firstpage () {
+		return "redirect:/gamelist";
+	}
+	
 	//default
 	@RequestMapping(value= "/index", method = RequestMethod.GET)
 	public String index() {
